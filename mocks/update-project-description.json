@@ -1,0 +1,7 @@
+{
+  "queryStringParameters": {
+    "projectId": "example_user_cognito_id:::Project name 3",
+    "entryId" :  "16fb9030-e472-11e8-a57c-d92685ff8e47",
+    "newDescription": "New description"
+  }
+}

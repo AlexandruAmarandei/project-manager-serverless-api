@@ -1,0 +1,196 @@
+service: project-manager-api
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: eu-west-1
+
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:eu-west-1:*:*"
+    
+    - Effect: Allow
+      Action: 
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+        - ses:SendEmail
+        - ses:SendRawEmail
+      Resource: "*"
+
+functions:
+     
+  postConfirmation:
+    handler: postConfirmation.main
+    events:
+      - http:
+          path: postConfirmation
+          method: post
+          cors: true
+          authorizer: aws_iam
+                   
+  getRemoveUser:
+    handler: removeuser.main
+    events:
+      - http:
+          path: getRemoveUser
+          method: get
+          cors: true
+          authorizer: aws_iam 
+    
+  createUser:
+    handler: createUser.main
+    events:
+      - http:
+          path: createUser
+          method: post
+          cors: true
+          authorizer: aws_iam
+          
+  updateUser:
+    handler: updateUser.main
+    events:
+      - http:
+          path: updateUser
+          method: post
+          cors: true
+          authorizer: aws_iam
+          
+  createProject:
+    handler: createProject.main
+    events:
+      - http:
+          path: createProject
+          method: post
+          cors: true
+          authorizer: aws_iam
+          
+          
+  addUserToProject:
+    handler: addUserToProject.main
+    events:
+      - http:
+          path: addUserToProject
+          method: post
+          cors: true
+          authorizer: aws_iam
+          
+  changeStatusOfProject:
+    handler: changeStatusOfProject.main
+    events:
+      - http:
+          path: changeStatusOfProject
+          method: post
+          cors: true
+          authorizer: aws_iam    
+          
+  removeUserFromProject:
+    handler: removeUserFromProject.main
+    events:
+      - http:
+          path: removeUserFromProject
+          method: post
+          cors: true
+          authorizer: aws_iam
+          
+  searchBySkill:
+    handler: searchBySkill.main
+    events:
+      - http:
+          path: searchBySkill
+          method: get
+          cors: true
+          authorizer: aws_iam
+          
+  searchUserByName:
+    handler: searchUserByName.main
+    events:
+      - http:
+          path: searchUserByName
+          method: get
+          cors: true
+          authorizer: aws_iam
+          
+  searchProjectByName:
+    handler: searchProjectByName.main
+    events:
+      - http:
+          path: searchProjectByName
+          method: get
+          cors: true
+          authorizer: aws_iam
+          
+  listProjects:
+    handler: listProjects.main
+    events:
+      - http:
+          path: listProjects
+          method: get
+          cors: true
+          authorizer: aws_iam       
+
+  listProjectParticipant:
+    handler: listProjectParticipant.main
+    events:
+      - http:
+          path: listProjectParticipant
+          method: get
+          cors: true
+          authorizer: aws_iam 
+          
+  getProjectInfo:
+    handler: getProjectInfo.main
+    events:
+      - http:
+          path: getProjectInfo
+          method: get
+          cors: true
+          authorizer: aws_iam 
+          
+  updateProjectDescription:
+    handler: updateProjectDescription.main
+    events:
+      - http:
+          path: updateProjectDescription
+          method: post
+          cors: true
+          authorizer: aws_iam 
+          
+  getUserInfo:
+    handler: getUserInfo.main
+    events:
+      - http:
+          path: getUserInfo
+          method: get
+          cors: true
+          authorizer: aws_iam 
+          
+  sendEmail:
+    handler: sendEmail.main
+    events:
+      - http:
+          path: sendEmail
+          method: post
+          cors: true
+          authorizer: aws_iam 
+          

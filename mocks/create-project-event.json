@@ -1,0 +1,9 @@
+{
+  "body": "{\"email\":\"cinigu@zsero.com\",\"description\":\"Sample descripiton 1\",\"projectName\":\"asdasd\"}",
+  
+    "requestContext": {
+      "identity": {
+        "cognitoIdentityId": "example_user_cognito_id"
+      }
+    }
+  }

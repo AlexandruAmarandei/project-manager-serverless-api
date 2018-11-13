@@ -1,0 +1,13 @@
+{
+  "queryStringParameters": {
+    "projectName":  ""
+  },
+    "pathParameters": {
+      "id": "16fb9030-e472-11e8-a57c-d92685ff8e47"
+    },
+    "requestContext": {
+      "identity": {
+        "cognitoIdentityId": "example_user_cognito_id"
+      }
+    }
+  }

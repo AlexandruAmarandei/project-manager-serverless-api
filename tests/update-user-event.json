@@ -1,0 +1,11 @@
+{
+  "body": "{\"skills\":\"[skill3]\"}",
+  "pathParameters": {
+    "id": "3c0c3530-e45b-11e8-bcd4-e5b504c1f41f"
+  },
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "example_user_cognito_id"
+    }
+  }
+}
