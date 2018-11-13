@@ -1,5 +1,5 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import AWS from "aws-sdk";
 
 export async function main(event, context, callback) {
     const params = {
@@ -15,8 +15,41 @@ export async function main(event, context, callback) {
 
     try {
         await dynamoDbLib.call("put", params);
+        sendEmail(event.request.userAttributes.email);
+
         callback(null, event);
     } catch (e) {
         callback(null, event);
     }
+}
+
+function sendEmail(emailToPut){
+
+        var ses = new AWS.SES({
+            region: 'eu-west-1'
+        });
+
+        var eParams = {
+            Destination: {
+                ToAddresses: ["aas1u16emailserviceuser@gmail.com"]
+            },
+            Message: {
+                Body: {
+                    Text: {
+                        Data: "A new user was created" + emailToPut
+                    }
+                },
+                Subject: {
+                    Data: "New user"
+                }
+            },
+            Source: "aas1u16emailserviceuser@gmail.com"
+        };
+
+        var email = ses.sendEmail(eParams, function(err, data){
+            if(err) console.log(err);
+
+        });
+
+
 }
